@@ -1,0 +1,50 @@
+{
+  "steps": [
+    {
+      "name": "institution",
+      "fields": [
+        "request_id",
+        "institution",
+        "csrf",
+        "draft_version"
+      ]
+    },
+    {
+      "name": "project",
+      "depends_on": "institution",
+      "options": {
+        "I1": [
+          "P1",
+          "P2"
+        ],
+        "I2": [
+          "P3"
+        ]
+      }
+    },
+    {
+      "name": "approval",
+      "bound_fields": [
+        "institution",
+        "project",
+        "amount"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "request": "REQ1",
+      "action": "external_edit",
+      "draft_version": 2
+    },
+    {
+      "request": "REQ2",
+      "action": "cancel"
+    },
+    {
+      "request": "REQ1",
+      "action": "change_amount",
+      "after_approval": true
+    }
+  ]
+}

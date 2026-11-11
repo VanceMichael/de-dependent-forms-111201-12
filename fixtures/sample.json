@@ -1,0 +1,21 @@
+{
+  "options": {
+    "I1": [
+      "P1",
+      "P2"
+    ],
+    "I2": [
+      "P3"
+    ]
+  },
+  "requests": [
+    {
+      "id": "REQ1",
+      "content": {
+        "institution": "I1",
+        "project": "P2",
+        "amount": "1200"
+      }
+    }
+  ]
+}
