@@ -9,15 +9,22 @@ from .transport import Client, replay_server
 
 
 def main():
-    parser = argparse.ArgumentParser(description='本地采集与凭据查看')
-    parser.add_argument('command', choices=['demo', 'import', 'show', 'serve'])
+    parser = argparse.ArgumentParser(description='本地采集与版本化续填')
+    parser.add_argument('command',
+                        choices=['demo', 'import', 'show', 'serve', 'workflow-demo'])
     parser.add_argument('--input', default='fixtures/sample.json')
+    parser.add_argument('--forms', default='fixtures/forms.json')
+    parser.add_argument('--requests', default='fixtures/requests.csv')
     parser.add_argument('--db', default='var/records.sqlite3')
     parser.add_argument('--port', type=int, default=8080)
     arguments = parser.parse_args()
     if arguments.command == 'serve':
         from .api import serve
         serve(arguments.db, arguments.port)
+        return
+    if arguments.command == 'workflow-demo':
+        from .scenario import run
+        run(arguments.forms, arguments.requests)
         return
     if arguments.command == 'demo':
         with tempfile.TemporaryDirectory() as directory:
